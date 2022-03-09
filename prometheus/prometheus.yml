@@ -9,3 +9,9 @@ scrape_configs:
     scrape_interval: 10s
     static_configs:
       - targets: ['localhost:9090']
+
+  - job_name: 'dummy-microservice'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['dummy-microservice:8080']

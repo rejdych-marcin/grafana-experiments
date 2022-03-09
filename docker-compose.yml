@@ -4,7 +4,7 @@ services:
   grafana:
     image: grafana/grafana:8.4.3
     container_name: grafana
-    restart: unless-stopped
+    restart: on-failure
     volumes:
       - grafana_data:/var/lib/grafana
       - ./grafana/provisioning:/etc/grafana/provisioning
@@ -20,7 +20,7 @@ services:
   prometheus:
     image: prom/prometheus:v2.33.5
     container_name: prometheus
-    restart: unless-stopped
+    restart: on-failure
     volumes:
       - ./prometheus:/etc/prometheus
       - prometheus_data:/prometheus
@@ -33,6 +33,15 @@ services:
       - '--web.enable-lifecycle'
     ports:
       - "9090:9090"
+    networks:
+      - monitor-net
+
+  dummy-microservice:
+    build: ./dummy-microservice
+    container_name: dummy-microservice
+    restart: on-failure
+    ports:
+      - "8080:8080"
     networks:
       - monitor-net
 

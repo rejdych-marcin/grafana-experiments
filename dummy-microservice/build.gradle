@@ -1,0 +1,25 @@
+apply plugin: 'application'
+
+sourceCompatibility = 11
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.6.4'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.6.4'
+    compile group: 'io.micrometer', name: 'micrometer-registry-prometheus', version: '1.8.3'
+}
+
+mainClassName = "app.ApiAppEntry"
+applicationName = 'dummy-microservice'
+
+task unzip2(type: Copy) {
+    from zipTree(file("${buildDir}/distributions/dummy-microservice.zip"))
+    into file("${buildDir}/unzipDir")
+}
+
+build.configure {
+    dependsOn tasks.unzip2
+}

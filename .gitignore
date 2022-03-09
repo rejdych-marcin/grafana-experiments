@@ -5,6 +5,10 @@
 *.iml
 .idea
 
+# Gradle
+*/.gradle
+build
+
 # Log file
 *.log
 
@@ -16,6 +20,7 @@
 
 # Package Files #
 *.jar
+!dummy-microservice/gradle/wrapper/gradle-wrapper.jar
 *.war
 *.nar
 *.ear
