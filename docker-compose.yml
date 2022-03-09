@@ -32,7 +32,7 @@ services:
       - '--storage.tsdb.retention.time=200h'
       - '--web.enable-lifecycle'
     ports:
-      - "9090"
+      - "9090:9090"
     networks:
       - monitor-net
 
